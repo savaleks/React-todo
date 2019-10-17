@@ -11,7 +11,7 @@
 
 .todo-item.important .todo-item-label {
     font-weight: bold;
-    color: brown;
+    color: blue;
 }
 
 .todo-item-label .todo-item {

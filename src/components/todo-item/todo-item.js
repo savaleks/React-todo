@@ -1,30 +1,66 @@
-import React from "react";
-import "./todo-item.css"
+import React, {Component} from "react";
+import "./todo-item.css";
 
-const TodoListItem = ({label, important = false}) => {
+class TodoListItem extends Component {
 
-    const style = {
-        color: important ? 'blue' : 'black',
-        fontWeight: important ? 'bold' : 'normal'
+    constructor(){
+        super();
+        this.onLabelClick = () => {
+            this.setState(({done}) => {
+                return {
+                    done: !done
+                };
+            });
+        };
+        this.state = {
+            done: false,
+            important: false
+        }
+        this.onMarkImportant = () => {
+            this.setState(({important}) => {
+                return {
+                    important: !important
+                }
+            });
+        };
     }
 
-    return (
-    <span className="todo-item">
-        <span className="todo-item-label" 
-            style = {style}>{label}</span>
+    render(){
 
-            <button type="button"
-            className="btn btn-outline-success btn-small float-right">
-            <i className="fa fa-exclamation"/>
-            </button>
+        const {label, onDeleted} = this.props;
+
+        const { done, important } = this.state;
+
+        let classNames = 'todo-item';
+        if (done){
+            classNames += ' done';
+        }
+        if(important){
+            classNames += ' important';
+        }
+    
+        return (
+        <span className={classNames}>
+            <span className="todo-item-label" 
+                onClick = {this.onLabelClick}>
+                {label}
+            </span>
+    
+                <button type="button"
+                className="btn btn-outline-success btn-small float-right"
+                onClick={this.onMarkImportant}>
+                <i className="fa fa-exclamation"/>
+                </button>
+                
+                <button type="button"
+                className="btn btn-outline-danger btn-small float-right"
+                onClick={onDeleted}>
+                <i className="fa fa-trash"/>
+                </button>
             
-            <button type="button"
-            className="btn btn-outline-danger btn-small float-right">
-            <i className="fa fa-trash"/>
-            </button>
-        
-    </span>
-    )
+        </span>
+        )
+    }
 }
 
 export default TodoListItem;
