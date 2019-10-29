@@ -3,6 +3,7 @@ import HeaderApp from "../app-header";
 import SearchWord from "../search-panel";
 import TodoList from "../todo-list";
 import ItemStatusFilter from "../item-status-filter";
+import AddItem from "../add-item";
 import "./app.css";
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
 
             const before = todoData.slice(0, idx);
             const after = todoData.slice(idx + 1);
-            const newArray = [... before, ... after];
+            const newArray = [...before, ...after];
 
             return {
                 todoData: newArray
@@ -39,6 +40,7 @@ class App extends Component {
                 </div>
                 <TodoList todos = {this.state.todoData}
                 onDeleted={this.deleteItem}/>
+                <AddItem/>
             </div>
             )
     }
