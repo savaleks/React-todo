@@ -8,6 +8,8 @@ import "./app.css";
 
 class App extends Component {
 
+    itemId = 100;
+
     state = {
         todoData: [
             {label: 'Drink Coffee', important: false, id:1},
@@ -30,6 +32,24 @@ class App extends Component {
         })
     }
 
+    onButtonClickAddItem = (text) => {
+        
+        const newItem = {
+            label: text,
+            important: false,
+            // generate item id;
+            id: this.itemId++
+        }
+
+        // add element in array
+        this.setState(({todoData}) => {
+            const newArr = [... todoData, newItem]
+            return {
+                todoData: newArr
+            }
+        })
+    }
+
     render(){
         return (
             <div className="todo-app">
@@ -40,7 +60,7 @@ class App extends Component {
                 </div>
                 <TodoList todos = {this.state.todoData}
                 onDeleted={this.deleteItem}/>
-                <AddItem/>
+                <AddItem onItemAdded={this.onButtonClickAddItem}/>
             </div>
             )
     }

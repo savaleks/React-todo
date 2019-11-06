@@ -6,7 +6,8 @@ class AddItem extends Component {
     render() {
         return (
             <div className="add-item">
-            <button className="btn btn-outline-success btn-small float-right">
+            <button className="btn btn-outline-success btn-small float-right"
+            onClick={() => this.props.onItemAdded("hello react")}>
             <i className="fa fa-plus"/> Add
             </button>
             </div>
